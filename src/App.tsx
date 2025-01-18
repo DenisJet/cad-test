@@ -86,6 +86,8 @@ function App() {
       </Form>
       <div id="canvas-container">
         <Canvas>
+          <directionalLight castShadow position={[3, 7, 10]} intensity={2} />
+          <directionalLight position={[0, -6, -10]} intensity={2} />
           <Cube width={width} height={height} depth={depth} />
         </Canvas>
       </div>
