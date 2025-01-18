@@ -13,23 +13,33 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Canvas } from "@react-three/fiber";
+import Cube from "./components/Cube/Cube";
+import { useState } from "react";
 
 function App() {
+  const [width, setWidth] = useState("1");
+  const [height, setHeight] = useState("1");
+  const [depth, setDepth] = useState("1");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      height: "",
-      width: "",
-      length: "",
+      height: width,
+      width: height,
+      depth: depth,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    setWidth(values.width);
+    setHeight(values.height);
+    setDepth(values.depth);
   }
 
   return (
-    <div>
+    <div className="grid grid-cols-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -60,10 +70,10 @@ function App() {
           />
           <FormField
             control={form.control}
-            name="length"
+            name="depth"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Length</FormLabel>
+                <FormLabel>Depth</FormLabel>
                 <FormControl>
                   <Input placeholder="length" {...field} type="number" />
                 </FormControl>
@@ -74,6 +84,11 @@ function App() {
           <Button type="submit">Calculate</Button>
         </form>
       </Form>
+      <div id="canvas-container">
+        <Canvas>
+          <Cube width={width} height={height} depth={depth} />
+        </Canvas>
+      </div>
     </div>
   );
 }
