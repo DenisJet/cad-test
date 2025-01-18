@@ -47,7 +47,7 @@ function App() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 p-8 text-right"
+            className="space-y-8 p-8 text-right border-2"
           >
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold">CubeGen</h1>
