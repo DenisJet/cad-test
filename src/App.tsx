@@ -39,15 +39,18 @@ function App() {
   }
 
   return (
-    <div className="grid grid-cols-3">
+    <div className="h-screen grid sm:grid-cols-3">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 bg-gray-900 p-8"
+        >
           <FormField
             control={form.control}
             name="height"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Height</FormLabel>
+                <FormLabel className="text-white">Height</FormLabel>
                 <FormControl>
                   <Input placeholder="height" {...field} type="number" />
                 </FormControl>
@@ -60,7 +63,7 @@ function App() {
             name="width"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Width</FormLabel>
+                <FormLabel className="text-white">Width</FormLabel>
                 <FormControl>
                   <Input placeholder="width" {...field} type="number" />
                 </FormControl>
@@ -73,7 +76,7 @@ function App() {
             name="depth"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Depth</FormLabel>
+                <FormLabel className="text-white">Depth</FormLabel>
                 <FormControl>
                   <Input placeholder="length" {...field} type="number" />
                 </FormControl>
@@ -81,10 +84,15 @@ function App() {
               </FormItem>
             )}
           />
-          <Button type="submit">Calculate</Button>
+          <Button type="submit" className="bg-slate-300 text-black">
+            Calculate
+          </Button>
         </form>
       </Form>
-      <div id="canvas-container">
+      <div
+        id="canvas-container"
+        className="h-full sm:h-lvh sm:col-span-2 bg-slate-800"
+      >
         <Canvas>
           <directionalLight castShadow position={[3, 7, 10]} intensity={2} />
           <directionalLight position={[0, -6, -10]} intensity={2} />
