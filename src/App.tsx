@@ -38,7 +38,7 @@ function App() {
       setWidth(values.width);
       setHeight(values.height);
       setDepth(values.depth);
-    }, 2000);
+    }, 1000);
   }
 
   return (
@@ -100,6 +100,7 @@ function App() {
           className="h-full sm:h-lvh sm:col-span-2 border-2"
         >
           <Canvas>
+            <ambientLight intensity={1} />
             <directionalLight castShadow position={[3, 7, 10]} intensity={2} />
             <directionalLight position={[0, -6, -10]} intensity={2} />
             <Cube width={width} height={height} depth={depth} />
