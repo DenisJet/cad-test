@@ -18,8 +18,9 @@ import Cube from "./components/Cube/Cube";
 import { useState } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "./components/ModeToggle/ModeToggle";
-import axios, { AxiosError } from "axios";
+// import axios, { AxiosError } from "axios";
 import { PerspectiveCamera } from "@react-three/drei";
+import { getFakeData } from "./helpers/helpers";
 
 function App() {
   const [error, setError] = useState("");
@@ -37,22 +38,29 @@ function App() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const res = await axios.post("http://localhost:5000/api/cube", values);
+  // for server in server dir
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  //   try {
+  //     const res = await axios.post("http://localhost:5000/api/cube", values);
 
-      setCubeData(res.data);
-      setError("");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        if (error.response) {
-          setError(error.response.data.message);
-        }
-        if (error.request) {
-          setError("Error! Try again later.");
-        }
-      }
-    }
+  //     setCubeData(res.data);
+  //     setError("");
+  //   } catch (error) {
+  //     if (error instanceof AxiosError) {
+  //       if (error.response) {
+  //         setError(error.response.data.message);
+  //       }
+  //       if (error.request) {
+  //         setError("Error! Try again later.");
+  //       }
+  //     }
+  //   }
+  // }
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    const fakeData = getFakeData(values);
+    setCubeData(fakeData);
+    setError("");
   }
 
   return (
