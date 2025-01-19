@@ -18,32 +18,46 @@ import Cube from "./components/Cube/Cube";
 import { useState } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "./components/ModeToggle/ModeToggle";
+import axios, { AxiosError } from "axios";
 
 function App() {
-  const [width, setWidth] = useState("1");
-  const [height, setHeight] = useState("1");
-  const [depth, setDepth] = useState("1");
+  const [error, setError] = useState("");
+  const [cubeData, setCubeData] = useState<{
+    vertices: number[];
+    indices: number[];
+  }>({ vertices: [], indices: [] });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      height: width,
-      width: height,
-      depth: depth,
+      height: "",
+      width: "",
+      depth: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    setTimeout(() => {
-      setWidth(values.width);
-      setHeight(values.height);
-      setDepth(values.depth);
-    }, 1000);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await axios.post("http://localhost:5000/api/cube", values);
+
+      console.log(res.data);
+      setCubeData(res.data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          setError(error.response.data.message);
+        }
+        if (error.request) {
+          setError("Error! Try again later.");
+        }
+      }
+    }
   }
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="h-screen grid sm:grid-cols-3">
+        {error && <span>{error}</span>}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -103,7 +117,8 @@ function App() {
             <ambientLight intensity={1} />
             <directionalLight castShadow position={[3, 7, 10]} intensity={2} />
             <directionalLight position={[0, -6, -10]} intensity={2} />
-            <Cube width={width} height={height} depth={depth} />
+
+            <Cube vertices={cubeData.vertices} indices={cubeData.indices} />
           </Canvas>
         </div>
       </div>

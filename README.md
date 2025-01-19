@@ -35,3 +35,8 @@ server.
 
 Additional assignment (this will help you stand out).
 ● Implement a dark mode switch that affects both the 3D-scene and form section.
+
+/////////////////////////////////////////////////////////////////////
+
+start server: cad-test/server/ => npm i => npx ts-node server.ts
+start client (dev): cad-test/ => npm i => npm run dev
