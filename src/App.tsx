@@ -78,7 +78,7 @@ function App() {
                 <FormItem>
                   <FormLabel>Height</FormLabel>
                   <FormControl>
-                    <Input placeholder="height" {...field} type="number" />
+                    <Input placeholder="Height" {...field} type="number" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,7 +91,7 @@ function App() {
                 <FormItem>
                   <FormLabel>Width</FormLabel>
                   <FormControl>
-                    <Input placeholder="width" {...field} type="number" />
+                    <Input placeholder="Width" {...field} type="number" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,7 +104,7 @@ function App() {
                 <FormItem>
                   <FormLabel>Depth</FormLabel>
                   <FormControl>
-                    <Input placeholder="length" {...field} type="number" />
+                    <Input placeholder="Depth" {...field} type="number" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
