@@ -19,6 +19,7 @@ import { useState } from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "./components/ModeToggle/ModeToggle";
 import axios, { AxiosError } from "axios";
+import { PerspectiveCamera } from "@react-three/drei";
 
 function App() {
   const [error, setError] = useState("");
@@ -83,6 +84,7 @@ function App() {
                       {...field}
                       type="number"
                       min="1"
+                      max="10"
                     />
                   </FormControl>
                   <FormMessage />
@@ -101,6 +103,7 @@ function App() {
                       {...field}
                       type="number"
                       min="1"
+                      max="10"
                     />
                   </FormControl>
                   <FormMessage />
@@ -119,6 +122,7 @@ function App() {
                       {...field}
                       type="number"
                       min="1"
+                      max="10"
                     />
                   </FormControl>
                   <FormMessage />
@@ -132,11 +136,11 @@ function App() {
           id="canvas-container"
           className="h-full sm:h-lvh sm:col-span-2 border-2"
         >
-          <Canvas>
+          <Canvas className="cursor-pointer">
             <ambientLight intensity={1} />
             <directionalLight castShadow position={[3, 7, 10]} intensity={2} />
             <directionalLight position={[0, -6, -10]} intensity={2} />
-
+            <PerspectiveCamera makeDefault position={[5, 5, 10]} fov={75} />
             <Cube vertices={cubeData.vertices} indices={cubeData.indices} />
           </Canvas>
         </div>
