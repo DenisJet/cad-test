@@ -40,8 +40,8 @@ function App() {
     try {
       const res = await axios.post("http://localhost:5000/api/cube", values);
 
-      console.log(res.data);
       setCubeData(res.data);
+      setError("");
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response) {
@@ -57,12 +57,16 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="h-screen grid sm:grid-cols-3">
-        {error && <span>{error}</span>}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 p-8 text-right border-2"
           >
+            {error && (
+              <span className="text-red-600 font-semibold text-lg">
+                {error}
+              </span>
+            )}
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-bold">CubeGen</h1>
               <ModeToggle />
